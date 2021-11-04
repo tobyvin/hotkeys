@@ -1,15 +1,15 @@
 #!/bin/bash
 
 in=hotkeys.ahk
-out=hotkeys.exe
+out=dist/hotkeys.exe
+ahk2exe='/mnt/c/Users/tobyv/scoop/apps/autohotkey/current/Compiler/ahk2exe.exe'
+ahkbin='C:\Users\tobyv\scoop\apps\autohotkey\current\Compiler\ANSI 32-bit.bin'
 
 echo "#NoTrayIcon" > build.ahk
 cat $in >> build.ahk
 
 taskkill.exe /IM $out /F /T &>/dev/null
 
-/mnt/c/Program\ Files/AutoHotkey/Compiler/Ahk2Exe.exe /in $(wslpath -w build.ahk) /out $out
+$ahk2exe /in $(wslpath -w build.ahk) /out $out /base "${ahkbin}"
 
 rm build.ahk
-
-powershell.exe -NoProfile -c "(New-Object -ComObject WScript.Shell).Run('hotkeys.exe', 1, \$false)"

@@ -5,6 +5,8 @@
 
 >#,::#Left
 >#.::#Right
+#-::Send, {ASC 0151}
++#-::Send, {ASC 0150}
 
 #If !ModifierPressed()
 
@@ -28,9 +30,14 @@
 
 #If
 
+#IfWinActive ahk_exe DiscordCanary.exe
+F1::^k
+#IfWinActive ahk_exe msedge.exe
+F1::^k
+#IfWinActive
+
 ModifierPressed() {
 	Return GetKeyState("Ctrl", "P")
 	|| GetKeyState("Alt", "P")
 	|| GetKeyState("Shift", "P")
 }
-
