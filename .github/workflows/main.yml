@@ -1,0 +1,24 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Compile with Ahk2Exe
+        uses: cennis91/action-ahk2exe@main
+        id: ahk2exe
+        with:
+          in: src/hotkeys.ahk
+          out: out/hotkeys.exe
+          icon: res/icon.ico
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ${{ steps.ahk2exe.outputs.binary }}
