@@ -7,8 +7,8 @@
 >#.::#Right
 #-::Send, {ASC 0151}
 +#-::Send, {ASC 0150}
-+::!?::‽
-+::?!::⸘
+::!?::‽
+::?!::⸘
 
 #If !ModifierPressed()
 
